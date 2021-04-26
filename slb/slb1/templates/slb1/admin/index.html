@@ -145,7 +145,7 @@
                                                 
                                                         <td>{{reserveItem.quantity}}</td>
                                                         <td>{{reserveItem.reserve.date_reserved}}</td>
-                                                        <td><a href="{% url 'approve' reserveItem.reserve.id %}"><span class="badge badge-pill badge-success">Approve</span></a> </td>
+                                                        <td><a href="{% url 'approve' reserveItem.equipment.id %}"><span class="badge badge-pill badge-success">Approve</span></a> </td>
                                                     </tr>
                                                     {% endfor %}
                                               

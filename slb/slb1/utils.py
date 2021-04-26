@@ -45,8 +45,9 @@ def cookieCart(request):
 def cartData(request):
 	if request.user.is_authenticated:
 		student = request.user.students
-		reserve, created = Reserve.objects.get_or_create(student=student, returned=False)
-		items =   reserve.reserveitem_set.all()
+		equipment = Equipments.objects.filter(returned=False)
+		reserve, created = Reserve.objects.get_or_create(student=student)
+		items =   reserve.reserveitem_set.all().filter(equipment__in=equipment)
 		cartItems = reserve.get_reserved_items
 	else:
 		return

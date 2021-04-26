@@ -37,12 +37,13 @@ def index(request):
     total_available = available_equipments.count()
 
 
-    reserve= Reserve.objects.filter(approved=False, returned=False)
-    reserveItem=  ReserveItem.objects.all().filter(reserve__in=reserve)
+    reserve= Reserve.objects.filter(returned=False)
+    equipment_approved = Equipments.objects.filter(approved=False) 
+    reserveItem=  ReserveItem.objects.all().filter(reserve__in=reserve, equipment__in=equipment_approved)
     reserved_total = sum([item.quantity for item in reserveItem])
 
-    new_reserve= Reserve.objects.filter(returned=False)
-    new_reserveItem=  ReserveItem.objects.all().filter(reserve__in=new_reserve)
+    new_equipment= Equipments.objects.filter(returned=False)
+    new_reserveItem=  ReserveItem.objects.all().filter(equipment__in=new_equipment)
     new_reserved_total = sum([item.quantity for item in new_reserveItem])
 
     new_available = total_quantity - new_reserved_total
@@ -245,9 +246,9 @@ def reserved(request):
 
 
 def approve(request, pk):
-    reserve = Reserve.objects.get(pk=pk)
-    reserve.approved = True
-    reserve.save()
+    equipment = Equipments.objects.get(pk=pk)
+    equipment.approved = True
+    equipment.save()
     messages.success(request, 'Successfully approved the equipments to students')
     return redirect('index')
 
@@ -263,8 +264,8 @@ def complete_order(request, pk):
 
 
 def collection(request):
-    reserve= Reserve.objects.filter(approved=True)
-    reserveItem=  ReserveItem.objects.all().filter(reserve__in=reserve)
+    equipment= Equipments.objects.filter(approved=True)
+    reserveItem=  ReserveItem.objects.all().filter(equipment__in=equipment)
     reserved_total = sum([item.quantity for item in reserveItem])
 
     context = {'reserveItem': reserveItem}
@@ -272,9 +273,9 @@ def collection(request):
 
 
 def collect(request, pk):
-    reserve = Reserve.objects.get(pk=pk)
-    reserve.returned = True
-    reserve.save()
+    equipment = Equipments.objects.get(pk=pk)
+    equipment.returned = True
+    equipment.save()
     messages.success(request, 'Equipment collected successfully!')
     return redirect('collection')
 

@@ -10,6 +10,7 @@ class Equipments(models.Model):
     available = models.IntegerField(default=0, null=True, blank=True)
     borrowed = models.BooleanField(default=False)
     returned = models.BooleanField(default=False)
+    approved = models.BooleanField(default=False)
     image = models.ImageField(default="yes1.jpg", null=True, blank=True)
 
     def __str__(self):

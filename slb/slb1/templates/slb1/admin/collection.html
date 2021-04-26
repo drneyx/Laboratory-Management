@@ -68,12 +68,12 @@
                                                 
                                                         <td>{{reserveItem.quantity}}</td>
                                                         <td>{{reserveItem.reserve.date_reserved}}</td>
-                                                        {% if reserveItem.reserve.returned == True %}
+                                                        {% if reserveItem.equipment.returned == True %}
                                                         <td><span class="badge badge-pill badge-success">Returned</span></td>
                                                         <td><span class="badge badge-pill badge-success">Already collected</span></td>
                                                         {% else%}
                                                         <td><span class="badge badge-pill badge-danger">Not returned</span></td>
-                                                        <td><a href="{% url 'collect' reserveItem.reserve.id %}"><span class="badge badge-pill badge-success">Collect</span></a> </td>
+                                                        <td><a href="{% url 'collect' reserveItem.equipment.id %}"><span class="badge badge-pill badge-success">Collect</span></a> </td>
                                                         {% endif %}
                                                        
                                                     </tr>
