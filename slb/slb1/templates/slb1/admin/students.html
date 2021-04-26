@@ -1,0 +1,118 @@
+{% extends  'slb1/admin/main2.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
+ <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" language="javascript" src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+
+
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#example').DataTable();
+
+} );
+
+ window.onload = setupRefresh;
+
+      function setupRefresh() {
+          setInterval("refreshFrame();", 1000);
+      }
+      function refreshFrame() {
+         parent.right_frame.location.reload();
+      }
+    </script>
+
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Student management </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Student management</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+           {% for message in messages %}
+                    <div class="alert alert-success {{ message.tags }} alert-dismissible" role="alert" timeout = 500 >
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+  <div class="col-lg-12 col-md-12">
+              <div class="card">
+                 <center>
+    
+                <div class="card-header bg-co text-white ">
+                <div class="row"> 
+                <div class="col-md-9">
+                  <h4 class="card-title ">List of all Registered students</h4>
+                  </div>
+                 <div class="col-md-3">
+
+                <a href=""><button class="btn btn-primary bg colo"><i class="fas fa-plus"></i> Add new</button></a>
+              </div>
+              </div>
+             
+              </div>
+              </center> 
+   
+                     <div class="demo-html bg-white">
+                   <table id="example" class="display responsive nowrap" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Reg No.</th>
+                              <th>First name</th>
+                               <th>Last name</th>
+                              <th>Email</th>
+                              <th>Status</th>
+                              <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                         {% for student in  students %}
+                              <tr>
+                             <td>{{student.idn}}</td>
+                                <td>{{student.user.first_name}}</td>
+                                 <td>{{student.user.last_name}}</td>
+                                <td>{{student.user.email}}</td>
+                                {% if student.status == True %}
+                                <td><span class="badge badge-pill badge-success">Approved</span></td>
+                                <td><span class="badge badge-pill badge-success">Already approved</span></td>
+                                {% else%}
+                                <td><span class="badge badge-pill badge-danger">waiting for approval</span></td>
+                                <td><a href="{% url 'approve_student' student.id %}"><span class="badge badge-pill badge-success">Approve</span></a> </td>
+                                {% endif %}
+                               
+                             </tr>
+                             {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+         
+        </div>
+
+        
+        {% endblock content %}
+     

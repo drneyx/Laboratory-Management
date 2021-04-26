@@ -1,0 +1,38 @@
+ {% extends 'slb1/admin/main.html' %} 
+{% load static %} 
+{% block content %}
+  <div class="main-container">
+    <div class="xs-pd-20-10 pd-ltr-20">
+      <div class="page-header">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="title">
+             <p class="text-white">Are you sure you want to delete?</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 text-right">
+          </div>
+        </div>
+      </div>
+       
+            <form action= "{%  url 'approve'  paralegal.id %}" method="post" class="d-inline">
+            {% csrf_token %}
+
+            <div class="row">
+              <div class="col-md-2">
+
+            <a class="btn btn-danger" href="{% url 'a_index' %}"> Cancel</a>
+              </div>
+
+              <div class="col-md-2">
+
+            <input type="submit" class="btn btn-success" value="Yes, am sure">
+            </div>
+            </div>
+          </form>
+               
+    </div>
+  </div>
+ 
+
+{% endblock content  %}

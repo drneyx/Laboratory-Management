@@ -1,0 +1,109 @@
+{% extends  'slb1/admin/main.html' %}
+{% load static %}
+        {% block content %}
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Collection management </h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                          
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="ecommerce-widget">
+
+
+                         {% for message in messages %}
+                    <div class="alert alert-success {{ message.tags }} alert-dismissible" role="alert" timeout = 500 >
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{ message }}
+                    </div>
+                  {% endfor %}
+                        <div class="row">
+                            <!-- ============================================================== -->
+                      
+                            <!-- ============================================================== -->
+
+                                          <!-- recent orders  -->
+                            <!-- ============================================================== -->
+                            <div class="col-xl-9 col-lg-12 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <h5 class="card-header bg-co text-white">List of all approved equipments to students</h5>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class="bg-light">
+                                                    <tr class="border-0">
+                                                        <th class="border-0">Name</th>
+                                                        <th class="border-0">Reg-No</th>
+                                                        <th class="border-0">Equipment reserved</th>
+                                                        <th class="border-0">Date</th>
+                                                        <th class="border-0">Status</th>
+                                                        <th class="border-0">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for reserveItem in reserveItem %}
+                                                    <tr>
+                                                        <td>{{reserveItem.reserve.student.user.first_name}} {{reserveItem.reserve.student.user.last_name}}</td>
+                                                        <td>{{reserveItem.reserve.student.idn}}</td>
+                                                
+                                                        <td>{{reserveItem.quantity}}</td>
+                                                        <td>{{reserveItem.reserve.date_reserved}}</td>
+                                                        {% if reserveItem.reserve.returned == True %}
+                                                        <td><span class="badge badge-pill badge-success">Returned</span></td>
+                                                        <td><span class="badge badge-pill badge-success">Already collected</span></td>
+                                                        {% else%}
+                                                        <td><span class="badge badge-pill badge-danger">Not returned</span></td>
+                                                        <td><a href="{% url 'collect' reserveItem.reserve.id %}"><span class="badge badge-pill badge-success">Collect</span></a> </td>
+                                                        {% endif %}
+                                                       
+                                                    </tr>
+                                                    {% endfor %}
+                                              
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ============================================================== -->
+                            <!-- end recent orders  -->
+
+    
+                            <!-- ============================================================== -->
+                            <!-- ============================================================== -->
+                            <!-- customer acquistion  -->
+                            <!-- ============================================================== -->
+                           
+                            <!-- ============================================================== -->
+                            <!-- end customer acquistion  -->
+                            <!-- ============================================================== -->
+                        </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        {% endblock content %}
+     

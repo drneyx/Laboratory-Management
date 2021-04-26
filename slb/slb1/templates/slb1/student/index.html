@@ -1,0 +1,79 @@
+{% extends  'slb1/student/main.html' %}
+{% load static %}
+        {% block content %}
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title">Wellcome! Get laboratory equipment easily today and enjoy your practical</h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            {% comment %} <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li> {% endcomment %}
+                                          
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <!-- ============================================================== -->
+                    {% comment %} <div class="row">
+                        <div class="col-xl-9 col-lg-8 col-md-8 col-sm-12 col-12"> {% endcomment %}
+                            <div class="row">
+                            {% for equipment in  equipment %}
+                                <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 col-12">
+                                    <div class="product-thumbnail">
+                                        <div class="product-img-head">
+                                            <div class="product-img">
+                                                <img class="profile_picw" src="{{equipment.image.url}}" alt="" ></div>
+
+                                                {% if equipment.quantity == 0  %}
+                                                <div class="ribbons bg-danger"></div>
+                                            <div class="ribbons-text">Off</div>
+                                            {% else %}
+                                              <div class="ribbons bg-co"></div>
+                                            <div class="ribbons-text">Avai</div>
+                                            {% endif %}
+                                        
+                        
+                                        </div>
+                                        <div class="product-content bg-co">
+                                            <div class="product-content-head">
+                                                <h3 class="product-title text-white">{{equipment.name}}</h3>
+                                                <div class="product-rating d-inline-block">
+                                                  Number of equipments Available
+                                                   <div class="product-price text-white">{{equipment.quantity}}</div>
+                                                </div>
+                                               
+                                            </div>
+                                            <div class="product-btn">
+                                            {% if equipment.quantity == 0  %}
+                                                 <button data-equipment="{{equipment.id}}" data-action="add" 
+                                                 class="btn badge-danger add-btn update-cart float-left w-40 h-10" style="margin:5px;">Not Available</button>
+                                            {% else %}
+                                             <button data-equipment="{{equipment.id}}" data-action="add" 
+                                                 class="btn btn-outline-light add-btn update-cart float-left w-40 h-10" style="margin:5px;">Reserve now</button>
+                                            {% endif %}
+                                                <a href="#" class="btn btn-outlht"><i class="fas fa-exchane-alt"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+        
+        </div>
+        {% endblock content %}
+     

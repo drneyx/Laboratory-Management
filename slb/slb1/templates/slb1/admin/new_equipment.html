@@ -1,0 +1,95 @@
+{% extends  'slb1/admin/main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+   <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+                    <!-- ============================================================== -->
+                    <!-- pageheader  -->
+                    <!-- ============================================================== -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="page-header">
+                                <h2 class="pageheader-title colo m-t-40">Adding New E-Quipment</h2>
+                                <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+                                <div class="page-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                        
+                                           {% comment %} <div class="pd-20 bg-white card-box mb-30"> {% endcomment %}
+					<!-- <div class="wizard-content"> -->
+					 <div class="row">
+			          <div class="col-md-8 bg-white m-l-15 m-t-10">
+					  <form method='POST' enctype="multipart/form-data" action=''>
+							{% csrf_token %}
+						<div class="row m-t-20">
+			             <div class="col-md-4">
+			              <div class="form-group">
+			                 {{ form.name|as_crispy_field }}
+			              </div>
+			            </div>
+			              
+	                     <div class="col-md-4">
+			             <div class="form-group">
+			                 {{ form.discription|as_crispy_field }}
+			              </div>
+			          </div>
+			          </div>
+					  <div class="row ">
+			             <div class="col-md-4">
+			              <div class="form-group">
+			                 {{ form.quantity|as_crispy_field }}
+			              </div>
+			            </div>
+						 <div class="col-md-4">
+			              <div class="form-group">
+			                 {{ form.image|as_crispy_field}}
+			              </div>
+			            </div>
+						</div>
+
+						 <div class="row ">
+			             <div class="col-md-4">
+			              
+			                <input class='btn btn-primary bg-co' type='submit' value='save'/>
+			            
+			            </div>
+						</div>
+							
+						</form>
+				</div>
+				
+                                        
+                                    </nav>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+ {% comment %} <div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6 col-sm-12">
+							<div class="title">
+								<h4 class="text-white">Reporting Form</h4>
+							</div>
+							<nav aria-label="breadcrumb" role="navigation">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a class="text-white" href="{% url 'index' %}">Home</a></li>
+									<li class="breadcrumb-item active text-white" aria-current="page">Reporting Form</li>
+								</ol>
+							</nav>
+						</div>
+						
+					</div>
+				</div>
+        </div> {% endcomment %}
+        {% endblock content %}
+     

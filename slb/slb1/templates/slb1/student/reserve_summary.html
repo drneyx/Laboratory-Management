@@ -1,0 +1,120 @@
+{% extends 'slb1/student/main.html' %}
+{% load static %}
+{% block content %}
+<style type="text/css">
+    .box-element{
+        box-shadow:hsl(0, 0%, 80%,) 0 0 16px;
+        background-color:#fff;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    .cart-row{
+    	display: flex;
+    	align-items: flex-stretch;
+    	padding-bottom: 10px;
+    	margin-bottom: 10px;
+    	border-bottom: 1px solid #acecec;
+    }
+    .row-image{
+    	width: 100px;
+    }
+    .quantity{
+    	display: inline-block;
+    	font-weight: 700;
+    	padding-right: 10px;
+    }
+    .chg-quantity{
+    	width: 20px;
+        height:12px;
+    	cursor: pointer;
+    	display: block;
+    	margin-top: 5px;
+    	transition: 1s;
+    }
+    .chg-quantity:hover{
+    	opacity: .6;
+
+    }
+    .nathan{
+    	margin-left: : 1px;
+    }
+</style>
+
+        <div class="dashboard-wrapper">
+            <div class="dashboard-ecommerce">
+                <div class="container-fluid dashboard-content ">
+<div class="row justify-content-center" >
+	<div class="col-lg-8">
+		<div class="box-element row">
+			<a class="btn btn-outline-dark bg-co" href="{% url 'student_home' %}">&#x2190; continue finding</a>
+           <h3 class="m-l-25">Reservation Summary</h3>
+			<br>
+			<br>
+
+			<table class="table">
+				<tr>
+					<th><h5 class="m-t-20 m-l-20">Total Equipments:  <strong>{{order.get_reserved_items}} </strong></h5></th>
+					{% comment %} <th><h5>Total: <strong>Tsh {{order.get_cart_total|floatformat:2}} </strong></h5></th> {% endcomment %}
+					<th>
+					
+					</th>
+
+
+				</tr>
+				
+			</table>
+			
+		</div>
+		<br>
+
+          {% for message in messages %}
+                    <div class="alert alert-danger {{ message.tags }} alert-dismissible" role="alert" timeout = 500 >
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                      {{ message }}
+                    </div>
+        {% endfor %}
+		<div class="box-element">
+			<div class="cart-row">
+			<div style="flex:1"><strong>Image</strong></div>
+			{% comment %} <div style="flex:1"><strong>Equipment Id</strong></div> {% endcomment %}
+			<div style="flex:1"><strong>Name</strong></div>
+			<div style="flex:1"><strong>Quantity</strong></div>
+			<div style="flex:1"><strong>Action</strong></div>
+			{% comment %} <div style="flex:1"><strong>Action</strong></div> {% endcomment %}
+		</div>
+
+
+		{% for item in items %}
+
+		<div class="cart-row">
+			<div style="flex:1"><img class="profile_pc" src="{{item.equipment.image.url}}"></div>
+			{% comment %} <div style="flex:1">{{ item.equipment.id}}</div> {% endcomment %}
+			<div style="flex:1">{{ item.equipment.name}}</div>
+			<div style="flex:1" class="m-l-10">{{item.quantity}}</div>
+			<div style="flex:1">
+				<p class="quantity"></p>
+				<div class="quantity">
+					<img data-equipment="{{item.equipment.id}}"  data-action="add" class="chg-quantity update-cart" src="{% static 'img/arrow-up.png' %}">
+					<img data-equipment={{item.equipment.id}} data-action="remove" class="chg-quantity update-cart" src="{% static 'img/arrow-down.png' %}">
+					 
+				</div>
+			</div>
+			{% comment %} <div style="flex:1"><a style="float: right; margin: 5px" class="btn btn-outline-dark bg-co" href="{% url 'complete_order' item.reserve.id %}">Complete this order</a></div> {% endcomment %}
+		</div>
+
+		{% endfor %}
+
+	</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+{% endblock content %} 
